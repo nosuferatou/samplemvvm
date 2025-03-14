@@ -65,6 +65,8 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
 
+    //KOIN
+    implementation("io.insert-koin:koin-android:4.0.2")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

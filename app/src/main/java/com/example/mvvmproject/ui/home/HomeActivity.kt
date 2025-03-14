@@ -18,12 +18,11 @@ import com.example.mvvmproject.ui.adapter.NowPlayingAdapter
 import com.example.mvvmproject.viewmodel.MovieViewModel
 import com.example.mvvmproject.viewmodel.MovieViewModelFactory
 import com.example.mvvmproject.viewmodel.SpaceItemDecoration
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
-
-    private val repository by lazy { MovieRepository(RetrofitClient.instance) }
-    private val viewModel: MovieViewModel by viewModels { MovieViewModelFactory(repository) } // menggunakan ViewModelFactory untuk custom parameter
+    private val viewModel: MovieViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +31,6 @@ class HomeActivity : AppCompatActivity() {
 
         // fetch data from viewModel: MovieViewModel
         viewModel.fetchNowPlayingMovies(Constants.API_KEY)
-
         viewModel.nowPlayingMovies.observe(this) { movies ->
             if (movies != null) {
                 setNowPlayingRv(movies)
